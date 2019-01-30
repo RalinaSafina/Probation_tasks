@@ -71,6 +71,7 @@ namespace Parsing_csv
                 Main(args);
             }
         }
+
         public static void sort(List<List<string>> array, int column)
         {
             array.Sort((a, b) => a[column].CompareTo(b[column]));
