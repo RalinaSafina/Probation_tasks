@@ -1,0 +1,43 @@
+.content {
+    width: 50%;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+.outline {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.modal {
+    padding: 50px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.form{
+    position: relative;
+}
+
+.form-data{
+    position: relative;
+    padding: 10px;
+}
+
+.form-data > div {
+    padding-bottom: 10px;
+}
+
+.close-button{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.forms .form-data{
+    margin-bottom: 10px;
+}
