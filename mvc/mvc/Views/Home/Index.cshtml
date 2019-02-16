@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Редактор формы</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
+    <script type="text/javascript" src="~/Scripts/script.js"></script>
+</head>
+<body class="content">
+    <div id="example">
+        <div class="form-data outline" id="formData" style="display: none;">
+            <div>
+                <input type="text" name="Field_name" size="20" maxlength="30" placeholder="Заголовок поля" required />
+                <select name ="Select" id="select-element" onchange="changeSelectElement(event, this.value)" required >
+                    <option value="">Тип поля</option>
+                    <option value="text">Текст-строка</option>
+                    <option value="text">Текст-абзац</option>
+                    <option value="textarea">Один из списка</option>
+                    <option value="textarea">Несколько из списка</option>
+                    <option value="textarea">Раскрывающийся список</option>
+                </select>
+            </div>
+
+            <div id='inputText' style="display: none;">
+                <input type="text" name="Context" size="30" maxlength="50" placeholder="Placeholder" />
+            </div>
+
+            <div id='inputTextArea' style="display: none;">
+                <textarea rows="5" cols="50" name="Context">
+                </textarea>
+            </div>
+
+            <div>
+                <label><input type="checkbox" name="Check">Обязательное поле</label>
+            </div>
+
+            <button class="close-button" type="button" name="delete" onclick="deleteFormData(event)" value="X">
+            X
+            </button>
+        </div>
+    </div>
+
+    <form name="form" method="post">
+        <h1>Редактирование формы</h1>
+        <p><input type="text" name="FormName" size="45" maxlength="45" placeholder="Заголовок формы" required/></p>
+        <p><input type="text" name="FormDescr" size="45" maxlength="200" placeholder="Описание формы" /></p>
+        <p><h3>Поля формы:</h3></p>
+        <div id="forms" class="forms">
+        </div>
+        <div>
+            <a href="#" onclick="createNewFormData()">+ Добавить поле</a>
+        </div>
+        <div>
+            <input type="submit" name="save" value="Сохранить" onclick="return checkBlockNumber();" />
+            <input type="button" name="close" value="Закрыть" />
+        </div>
+    </form>
+</body>
+</html>
