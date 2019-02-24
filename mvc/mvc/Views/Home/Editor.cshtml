@@ -1,8 +1,12 @@
-﻿    <div id="example" name ="Block">
+﻿@model Mvc.Models.FormData
+<div id="example">
+    @for (int i = 0; i < Model.Select.Length; i++)
+    {
         <div class="form-data outline" id="formData" style="display: none;">
+
             <div>
-                <input type="text" name="Field_name" size="20" maxlength="30" placeholder="Заголовок поля" required />
-                <select name ="Select" id="select-element" onchange="changeSelectElement(event, this.value)" required >
+                <input type="text" name="Field_name" size="20" maxlength="30" value=@Model.Field_name[i] required />
+                <select name="Select" id="select-element" onchange="changeSelectElement(event, this.value)" required>
                     <option value="">Тип поля</option>
                     <option value="text">Текст-строка</option>
                     <option value="text">Текст-абзац</option>
@@ -13,29 +17,36 @@
             </div>
 
             <div id='inputText' style="display: none;">
-                <input type="text" name="Context" size="30" maxlength="50" placeholder="Placeholder" />
+                <input type="text" name="Context" size="30" maxlength="50" value=@Model.Context[i] />
             </div>
 
             <div id='inputTextArea' style="display: none;">
-                <textarea rows="5" cols="50" name="Context">
+                <textarea rows="5" cols="50" name="Context" value=@Model.Context[i]>
                 </textarea>
             </div>
 
             <div>
-                <label><input type="checkbox" name="Check">Обязательное поле</label>
+                <label><input type="checkbox" name="Check" value=@Model.Check[i]>Обязательное поле</label>
             </div>
-            <button class="close-button" type="button" name="delete" onclick="deleteFormData(event)" value="X">
-            X
-            </button>
-        </div>
-    </div>
 
+            <button class="close-button" type="button" name="delete" onclick="deleteFormData(event)" value="X">
+                X
+            </button>
+
+        </div>
+    }
+</div>
+
+@using (Html.BeginForm())
+{
     <form name="form" method="post">
         <h1>Редактирование формы</h1>
-        <p><input type="text" name="FormName" size="45" maxlength="45" placeholder="Заголовок формы" required /></p>
-        <p><input type="text" name="FormDescr" size="45" maxlength="200" placeholder="Описание формы" /></p>
+        <p><label>ID: @Model.FormGuid</label></p>
+        <p><input type="text" name="FormName" size="45" maxlength="45" value=@Model.FormName required /></p>
+        <p><input type="text" name="FormDescr" size="45" maxlength="200" value=@Model.FormDescr /></p>
         <p><h3>Поля формы:</h3></p>
         <div id="forms" class="forms">
+
         </div>
         <div>
             <a href="#" onclick="createNewFormData()">+ Добавить поле</a>
@@ -45,3 +56,4 @@
             <input type="button" name="close" value="Закрыть" />
         </div>
     </form>
+    }

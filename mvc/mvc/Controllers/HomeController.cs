@@ -4,6 +4,7 @@
 
 namespace Mvc.Controllers
 {
+    using System;
     using System.Web.Mvc;
     using Mvc.Models;
 
@@ -26,11 +27,34 @@ namespace Mvc.Controllers
         /// Post method of Index.
         /// </summary>
         /// <param name="formData">Contains info of form elements.</param>
-        /// <returns>"Success", if post methon ends successfully.</returns>
+        /// <returns> .</returns>
         [HttpPost]
-        public string Index(FormData formData)
+        public ActionResult Index(FormData formData)
         {
-            return "Success";
+            formData.FormGuid = Guid.NewGuid();
+            if (this.ModelState.IsValid)
+            {
+                this.Session["MyForm"] = formData;
+                return this.RedirectToAction("Editor", new { guid = formData.FormGuid });
+            }
+
+            return this.ViewBag.Message("oops");
+        }
+
+        /// <summary>
+        /// Editing form.
+        /// </summary>
+        /// <param name="guid">Contains info of form id.</param>
+        /// <returns> .</returns>
+        public ActionResult Editor(Guid guid)
+        {
+            FormData formData = (FormData)this.Session["MyForm"];
+            if (formData.FormGuid == guid)
+            {
+                return this.View(formData);
+            }
+
+            return this.ViewBag.Message("AAAAAAAAA");
         }
     }
 }
